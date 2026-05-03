@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/cron/expire-reservations",
-      "schedule": "* * * * *"
+      "schedule": "0 0 * * *"
     },
     {
       "path": "/api/cron/cleanup-idempotency",
-      "schedule": "0 * * * *"
+      "schedule": "0 1 * * *"
     }
   ]
 }
