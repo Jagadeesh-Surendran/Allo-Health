@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { serializeProduct } from '@/lib/serializers'
+import type { ProductDTO, StockLevelDTO } from '@/lib/schemas'
 
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -41,7 +42,7 @@ export default async function Home() {
     orderBy: { name: 'asc' },
   })
 
-  const products = rawProducts.map(serializeProduct)
+  const products: ProductDTO[] = rawProducts.map(serializeProduct)
 
   return (
     <div>
@@ -70,7 +71,7 @@ export default async function Home() {
             </CardContent>
           </Card>
         ) : (
-          products.map((product) => (
+          products.map((product: ProductDTO) => (
             <Card key={product.id}>
               <CardHeader className="pb-2">
                 <CardTitle className="text-base">{product.name}</CardTitle>
@@ -85,7 +86,7 @@ export default async function Home() {
                   {product.stockLevels.length === 0 ? (
                     <p className="text-sm text-slate-500">No active warehouse stock for this product.</p>
                   ) : (
-                    product.stockLevels.map((stockLevel) => (
+                    product.stockLevels.map((stockLevel: StockLevelDTO) => (
                       <div
                         key={stockLevel.warehouseId}
                         className="flex items-center justify-between gap-4 text-sm"
