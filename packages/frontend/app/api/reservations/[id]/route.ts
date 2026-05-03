@@ -7,9 +7,13 @@ import { serializeReservation } from '@/lib/serializers'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET(_request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  _request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
-    const id = CuidSchema.parse(params.id)
+    const { id: rawId } = await params
+    const id = CuidSchema.parse(rawId)
     const reservation = await getReservation(id)
     return ok(serializeReservation(reservation))
   } catch (error) {

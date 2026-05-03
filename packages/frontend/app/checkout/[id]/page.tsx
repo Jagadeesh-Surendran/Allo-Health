@@ -9,15 +9,17 @@ import { CheckoutClient } from './checkout-client'
 export const dynamic = 'force-dynamic'
 
 interface Props {
-  params: { id: string }
-  searchParams: { expiresAt?: string }
+  params: Promise<{ id: string }>
+  searchParams: Promise<{ expiresAt?: string }>
 }
 
 export default async function CheckoutPage({ params, searchParams }: Props) {
   let reservation
+  const { id } = await params
+  const { expiresAt } = await searchParams
 
   try {
-    reservation = serializeReservation(await getReservation(params.id))
+    reservation = serializeReservation(await getReservation(id))
   } catch {
     notFound()
   }
@@ -30,7 +32,7 @@ export default async function CheckoutPage({ params, searchParams }: Props) {
       reservation={reservation}
       productName={product?.name ?? 'Product'}
       warehouseName={warehouse?.name ?? 'Warehouse'}
-      urlExpiresAt={searchParams.expiresAt}
+      urlExpiresAt={expiresAt}
     />
   )
 }

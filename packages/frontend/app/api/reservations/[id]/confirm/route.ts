@@ -8,9 +8,13 @@ import { serializeReservation } from '@/lib/serializers'
 
 export const dynamic = 'force-dynamic'
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
-    const id = CuidSchema.parse(params.id)
+    const { id: rawId } = await params
+    const id = CuidSchema.parse(rawId)
     const idempotencyKey = getIdempotencyKey(request)
     const reservation = await withRetry(() => confirmReservation(id, idempotencyKey))
 
