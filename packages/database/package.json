@@ -1,0 +1,26 @@
+{
+  "name": "@allo-inventory/database",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "migrate:dev": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "generate": "prisma generate",
+    "seed": "ts-node -P tsconfig.seed.json prisma/seed.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "prisma": {
+    "seed": "ts-node -P tsconfig.seed.json prisma/seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "@upstash/redis": "^1.37.0",
+    "zod": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
