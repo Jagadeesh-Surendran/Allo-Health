@@ -3,16 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "description": "Real-time inventory reservation system - monorepo",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "dev:frontend": "pnpm --filter @allo-inventory/frontend dev",
-    "dev:backend": "pnpm --filter @allo-inventory/backend dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "dev:backend": "pnpm --filter backend dev",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
-    "db:migrate:dev": "pnpm --filter @allo-inventory/database migrate:dev",
-    "db:migrate:deploy": "pnpm --filter @allo-inventory/database migrate:deploy",
-    "db:seed": "pnpm --filter @allo-inventory/database seed",
-    "reset-stock": "pnpm --filter @allo-inventory/frontend reset-stock",
-    "stress-test": "pnpm --filter @allo-inventory/frontend stress-test"
+    "test": "pnpm -r test",
+    "db:migrate:dev": "pnpm --filter backend prisma migrate dev",
+    "db:migrate:deploy": "pnpm --filter backend prisma migrate deploy",
+    "db:seed": "pnpm --filter backend prisma db seed"
   },
   "devDependencies": {
     "typescript": "^5"

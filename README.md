@@ -1,3 +1,6 @@
+# Allo Inventory
+
+Monorepo scaffold for Allo Inventory (frontend + backend + infra).
 # Allo Inventory — Monorepo
 
 Real-time inventory reservation system with strict concurrency guarantees, now organized as a monorepo with separated **frontend**, **backend**, and **database** layers.
